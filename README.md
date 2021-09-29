@@ -1,5 +1,5 @@
 # ITIS_2021_2_BotService
-Telegram bot
+Telegram bot - @itis_microservices_2021_bot
 
 ## Getting started
 install python 3.4 to `{PYTHON_3.4_PATH}` from [https://www.python.org/downloads/release/python-340/](https://www.python.org/downloads/release/python-340/)
