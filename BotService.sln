@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BotService", "BotService\BotService.fsproj", "{3EE6AD6E-83B7-4888-A7F2-697215589EBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadSmellingBotServiceUsingCSharp", "BadSmellingBotServiceUsingCSharp\BadSmellingBotServiceUsingCSharp.csproj", "{38E5102B-2B34-4DDC-A724-E1A90A9849A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{3EE6AD6E-83B7-4888-A7F2-697215589EBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EE6AD6E-83B7-4888-A7F2-697215589EBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EE6AD6E-83B7-4888-A7F2-697215589EBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38E5102B-2B34-4DDC-A724-E1A90A9849A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38E5102B-2B34-4DDC-A724-E1A90A9849A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38E5102B-2B34-4DDC-A724-E1A90A9849A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38E5102B-2B34-4DDC-A724-E1A90A9849A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
