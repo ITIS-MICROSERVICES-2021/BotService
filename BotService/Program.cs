@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using BadSmellingBotServiceUsingCSharp.Extensions;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Telegram.Bot.Host.BotHost;
+using Telegram.Bot.Host.HostBuilderExtensions;
+using Host = Telegram.Bot.Host.Hosting.Host;
 
-namespace BadSmellingBotServiceUsingCSharp
+namespace BotService
 {
     internal static class Program
     {
@@ -15,20 +15,24 @@ namespace BadSmellingBotServiceUsingCSharp
                 .RunAsync();
         }
 
-        private static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((hostingContext, config) =>
+        private static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureBotHostDefaults(botBuilder => { botBuilder.UseStartup<Startup>(); });
+            /*.ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     config.AddJsonFile("appsettings.json", true);
                     config.AddEnvironmentVariables();
 
                     if (args != null) config.AddCommandLine(args);
                 })
-                .ConfigureLogging((hostingContext, logging) => {
+                .ConfigureLogging((hostingContext, logging) =>
+                {
                     logging.ClearProviders();
                     logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
                     logging.AddConsole();
-                })
-                .UseStartup<Startup>();
+                })*/
+        }
+        //.UseStartup<Startup>();
     }
 }

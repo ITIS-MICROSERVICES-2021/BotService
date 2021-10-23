@@ -1,10 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadSmellingBotServiceUsingCSharp", "BadSmellingBotServiceUsingCSharp\BadSmellingBotServiceUsingCSharp.csproj", "{38E5102B-2B34-4DDC-A724-E1A90A9849A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotService", "BotService\BotService.csproj", "{38E5102B-2B34-4DDC-A724-E1A90A9849A9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{15BD3869-7883-44A0-A416-7C3646517D49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadSmellingBotService.Tests", "BadSmellingBotService.Tests\BadSmellingBotService.Tests.csproj", "{883736CC-D570-4F51-AB59-F99F90878051}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotService.Tests", "BotService.Tests\BotService.Tests.csproj", "{883736CC-D570-4F51-AB59-F99F90878051}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
