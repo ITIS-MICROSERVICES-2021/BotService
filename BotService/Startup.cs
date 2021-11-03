@@ -1,4 +1,5 @@
 ﻿using BotService.Middlewares;
+using BotService.NotCommandHandlers;
 using BotService.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Telegram.Bot.Host.ApplicationBuilder;
 using Telegram.Bot.Host.BotServer;
 using Telegram.Bot.Host.CommandHandlerMiddleware;
+using Telegram.Bot.Host.CommandHandlerMiddleware.CommandHandlers;
 using Telegram.Bot.Host.Middleware;
 
 namespace BotService
@@ -27,6 +29,8 @@ namespace BotService
 
             services.AddScoped<CommandsListService>();
             services.AddScoped<ConstantMessagesService>();
+            services.AddScoped<UserRolesService>();
+            services.AddScoped<ICommandNotFoundHandler,NotCommandHandlersDispatcher>();
         }
 
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
