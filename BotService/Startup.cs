@@ -1,9 +1,12 @@
-﻿using BotService.Middlewares;
+﻿using System;
+using BotService.Middlewares;
 using BotService.NotCommandHandlers;
 using BotService.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RabbitMQ.Extensions;
+using RabbitMQ.Services;
 using Telegram.Bot.Host.ApplicationBuilder;
 using Telegram.Bot.Host.BotServer;
 using Telegram.Bot.Host.CommandHandlerMiddleware;
@@ -26,7 +29,7 @@ namespace BotService
             services.AddCommandHandlers();
 
             services.Configure<TelegramOptions>(Configuration.GetSection("Telegram"));
-
+            services.AddRabbitMQ(new Uri(""));
             services.AddScoped<CommandsListService>();
             services.AddScoped<ConstantMessagesService>();
             services.AddScoped<UserRolesService>();
@@ -37,7 +40,7 @@ namespace BotService
         {
             app.UseMiddleware<SaveUsersMiddleware>();
             app.UseMiddleware<SorryOlegMiddleware>();
-
+            
             app.UseCommandHandlers();
         }
     }

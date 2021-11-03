@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading.Tasks;
+using BotService.Models.Rabbit;
+using BotService.Rabbit.Producers;
 using Telegram.Bot.Host.BotServer;
 using Telegram.Bot.Host.CommandHandlerMiddleware;
 using Telegram.Bot.Host.CommandHandlerMiddleware.CommandHandlers;
@@ -11,6 +13,13 @@ namespace BotService.NotCommandHandlers
     [BotCommand(CommandText = "EmployeeVacancyRequest")]
     public class EmployeeVacancyRequestHandler : ICommandHandler
     {
+        private readonly EmployeeVacancyRequestProducer _producer;
+
+        public EmployeeVacancyRequestHandler(EmployeeVacancyRequestProducer producer)
+        {
+            _producer = producer;
+        }
+
         public async Task HandleAsync(BotUpdateContext botUpdateContext)
         {
             var message = botUpdateContext.Update.Message.Text;
@@ -20,7 +29,8 @@ namespace BotService.NotCommandHandlers
             {
                 var dateFrom = DateTime.ParseExact(splitMessage[4], "dd.MM.yyyy", CultureInfo.InvariantCulture);
                 var dateTo = DateTime.ParseExact(splitMessage[6], "dd.MM.yyyy", CultureInfo.InvariantCulture);
-                //рэббит
+                _producer.Produce(new EmployeeVacancyRequest()
+                    {From = dateFrom, To = dateTo, Username = botUpdateContext.Update.Message.From.Username});
                 await botUpdateContext.BotClient.SendTextMessageAsync(chatId, "Заявка отправлена",
                     cancellationToken: botUpdateContext.CancellationToken);
             }
