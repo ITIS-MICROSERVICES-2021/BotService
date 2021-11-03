@@ -34,7 +34,7 @@ namespace BotService.NotCommandHandlers
                 await botUpdateContext.BotClient.SendTextMessageAsync(chatId, "Заявка отправлена",
                     cancellationToken: botUpdateContext.CancellationToken);
             }
-            catch (Exception e)
+            catch (Exception _)
             {
                 await botUpdateContext.BotClient.SendTextMessageAsync(chatId, "Введите дату в корректном формате",
                     cancellationToken: botUpdateContext.CancellationToken);
