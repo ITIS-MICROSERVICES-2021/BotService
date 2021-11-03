@@ -12,6 +12,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Telegram.Bot.Host" Version="1.0.0" />
+      <PackageReference Include="Telegram.Bot.Host" Version="1.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Rabbit\Consumers" />
+      <Folder Include="Rabbit\Producers" />
     </ItemGroup>
 </Project>
