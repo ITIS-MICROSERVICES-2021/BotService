@@ -33,6 +33,7 @@ namespace BotService
             services.AddScoped<CommandsListService>();
             services.AddScoped<ConstantMessagesService>();
             services.AddScoped<UserRolesService>();
+            services.AddScoped<BotUpdateContext>();
             services.AddScoped<ICommandNotFoundHandler, NotCommandHandlersDispatcher>();
         }
 
