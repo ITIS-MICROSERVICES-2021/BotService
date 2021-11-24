@@ -15,7 +15,7 @@ namespace BotService.Rabbit.Producers
 
         public void Produce(EmployeeVacancyRequest dto)
         {
-            _rabbitMqService.Publish(dto, "", "");
+            _rabbitMqService.Publish(dto, "", RouteKeys.VacancyCreated);
         }
     }
 }
