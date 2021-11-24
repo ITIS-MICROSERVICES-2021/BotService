@@ -5,7 +5,7 @@ using Telegram.Bot.Host.Middleware;
 
 namespace BotService.NotCommandHandlers
 {
-    [BotCommand(CommandText = "NotFoundHandler")]
+    [BotCommand(CommandText = "DirectorApproved")]
     public class DirectorApprovedHandler : ICommandHandler
     {
         public async Task HandleAsync(BotUpdateContext botUpdateContext)
