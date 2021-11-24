@@ -6,12 +6,15 @@ namespace BotService.NotCommandHandlers
 {
     public class NotCommandHandlersDispatcher : ICommandNotFoundHandler
     {
+        private readonly DirectorVacancyApproveHandler _directorVacancyApproveHandler;
         private readonly EmployeeVacancyRequestHandler _employeeVacancyRequestHandler;
         private readonly NotFoundHandler _notFoundHandler;
 
-        public NotCommandHandlersDispatcher(EmployeeVacancyRequestHandler employeeVacancyRequestHandler,
+        public NotCommandHandlersDispatcher(DirectorVacancyApproveHandler directorVacancyApproveHandler,
+            EmployeeVacancyRequestHandler employeeVacancyRequestHandler,
             NotFoundHandler notFoundHandler)
         {
+            _directorVacancyApproveHandler = directorVacancyApproveHandler;
             _employeeVacancyRequestHandler = employeeVacancyRequestHandler;
             _notFoundHandler = notFoundHandler;
         }
@@ -22,6 +25,10 @@ namespace BotService.NotCommandHandlers
             if (message.StartsWith("Хочу в отпуск"))
             {
                 await _employeeVacancyRequestHandler.HandleAsync(botUpdateContext);
+            }
+            else if (message.StartsWith("Подтверждаю"))
+            {
+                await _directorVacancyApproveHandler.HandleAsync(botUpdateContext);
             }
             else
             {
