@@ -1,5 +1,6 @@
 ﻿using BotService.Middlewares;
 using BotService.NotCommandHandlers;
+using BotService.Rabbit.Producers;
 using BotService.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,7 +43,7 @@ namespace BotService
             services.AddScoped<CommandsListService>();
             services.AddScoped<ConstantMessagesService>();
             services.AddScoped<UserRolesService>();
-            services.AddScoped<BotUpdateContext>();
+            services.AddScoped<EmployeeVacancyRequestProducer>();
             services.AddScoped<ICommandNotFoundHandler, NotCommandHandlersDispatcher>();
         }
 
