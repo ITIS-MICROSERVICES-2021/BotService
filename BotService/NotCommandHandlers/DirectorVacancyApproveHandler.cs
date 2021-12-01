@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using BotService.Models;
 using CoreDTO.Redis;
+using CoreDTO.Redis.Vacation;
 using RedisIO.Services;
 using Telegram.Bot.Host.CommandHandlerMiddleware;
 using Telegram.Bot.Host.CommandHandlerMiddleware.CommandHandlers;
@@ -26,8 +27,8 @@ namespace BotService.NotCommandHandlers
             var splitMessage = message.Split(" ");
             try
             {
-                var request = await _redisIoService.GetAsync<RequestDto<EStatus, EPayload>>(splitMessage[2]);
-                request.Status = EStatus.Approved;
+                var request = await _redisIoService.GetAsync<VacationRequestDto>(splitMessage[2]);
+                request.Status = VacationRequestStatus.BossReview;
                 await _redisIoService.AddAsync(request.Id.ToString(), request);
                 await botUpdateContext.BotClient.SendTextMessageAsync(chatId, "Заявка подтверждена",
                     cancellationToken: botUpdateContext.CancellationToken);

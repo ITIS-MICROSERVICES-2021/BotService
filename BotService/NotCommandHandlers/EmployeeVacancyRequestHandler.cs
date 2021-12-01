@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading.Tasks;
-using BotService.Models.Rabbit;
+using BotService.Models;
 using BotService.Rabbit.Producers;
+using CoreDTO.Redis;
+using CoreDTO.Redis.Vacation;
 using Telegram.Bot.Host.BotServer;
 using Telegram.Bot.Host.CommandHandlerMiddleware;
 using Telegram.Bot.Host.CommandHandlerMiddleware.CommandHandlers;
@@ -29,8 +31,8 @@ namespace BotService.NotCommandHandlers
             {
                 var dateFrom = DateTime.ParseExact(splitMessage[4], "dd.MM.yyyy", CultureInfo.InvariantCulture);
                 var dateTo = DateTime.ParseExact(splitMessage[6], "dd.MM.yyyy", CultureInfo.InvariantCulture);
-                _producer.Produce(new EmployeeVacancyRequest()
-                    {From = dateFrom, To = dateTo, Username = botUpdateContext.Update.Message.From.Username});
+                _producer.Produce(new VacationRequestDto
+                    {StartAt = dateFrom, EndAt = dateTo, Author = botUpdateContext.Update.Message.From.Username});
                 await botUpdateContext.BotClient.SendTextMessageAsync(chatId, "Заявка отправлена",
                     cancellationToken: botUpdateContext.CancellationToken);
             }

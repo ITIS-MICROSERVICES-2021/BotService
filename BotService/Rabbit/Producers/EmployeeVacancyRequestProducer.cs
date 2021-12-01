@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using BotService.Models.Rabbit;
+using CoreDTO.Redis.Vacation;
+using RabbitMQ.Client;
 using RabbitMQ.Services;
 
 namespace BotService.Rabbit.Producers
@@ -13,9 +15,9 @@ namespace BotService.Rabbit.Producers
             _rabbitMqService = rabbitMqService;
         }
 
-        public void Produce(EmployeeVacancyRequest dto)
+        public void Produce(VacationRequestDto dto)
         {
-            _rabbitMqService.Publish(dto, "", RouteKeys.VacancyCreated);
+            _rabbitMqService.Publish(dto, ExchangeType.Direct, RouteKeys.RequestService);
         }
     }
 }
