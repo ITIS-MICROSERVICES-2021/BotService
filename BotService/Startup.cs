@@ -6,17 +6,21 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RabbitMQ.Extensions;
-using RedisIO.Converter;
 using RedisIO.ServicesExtensions;
+using Telegram.Bot.Host.CommandHandlerMiddleware;
+using Telegram.Bot.Host.Middleware;
+using RedisIO.Converter;
 using StackExchange.Redis;
 using Telegram.Bot.Host.ApplicationBuilder;
 using Telegram.Bot.Host.BotServer;
-using Telegram.Bot.Host.CommandHandlerMiddleware;
 using Telegram.Bot.Host.CommandHandlerMiddleware.CommandHandlers;
-using Telegram.Bot.Host.Middleware;
 
 namespace BotService
 {
+    public class MyClass
+    {
+        public string Message { get; set; }
+    }
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -37,7 +41,6 @@ namespace BotService
                     .UseJsonConverter()
                     .UseConfiguration(new ConfigurationOptions()
                     {
-                        //Тут надо какой - то хост, взял пока из доков редиса
                         EndPoints = { "localhost:6379" }
                     }));
             services.AddScoped<CommandsListService>();

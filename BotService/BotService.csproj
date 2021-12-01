@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="RabbitMQ.DI" Version="1.0.2" />
+      <PackageReference Include="RabbitMQ.DI" Version="1.0.4" />
       <PackageReference Include="RedisIO" Version="1.0.2" />
       <PackageReference Include="Telegram.Bot.Host" Version="1.0.2" />
     </ItemGroup>
