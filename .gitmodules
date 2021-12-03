@@ -1,0 +1,3 @@
+[submodule "BotService/CoreDTO"]
+	path = BotService/CoreDTO
+	url = https://github.com/ITIS-MICROSERVICES-2021/CoreDTO.git

@@ -1,10 +1,12 @@
-﻿using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
 using BotService.Services;
+using Microsoft.Extensions.Logging;
+using RabbitMQ.Services;
+using RedisIO.Services;
 using Telegram.Bot.Host.CommandHandlerMiddleware;
 using Telegram.Bot.Host.CommandHandlerMiddleware.CommandHandlers;
 using Telegram.Bot.Host.Middleware;
-using Telegram.Bot.Types.ReplyMarkups;
 
 namespace BotService.CommandHandlers
 {
@@ -15,34 +17,28 @@ namespace BotService.CommandHandlers
         private readonly ConstantMessagesService _constantMessagesService;
 
         public StartCommandHandler(CommandsListService commandsListService,
-            ConstantMessagesService constantMessagesService)
+            ConstantMessagesService constantMessagesService, IRedisIOService redis, IRabbitMQService rabbitMqService, ILogger<StartCommandHandler> logger)
         {
             _commandsListService = commandsListService;
             _constantMessagesService = constantMessagesService;
+            const string key = "myClass";
+            var myClass = new MyClass() {Message = "Message"};
+            redis.AddAsync(key, myClass);
+            
+            rabbitMqService.Subscribe<MyClass>(async n =>
+            {
+                var v = await redis.GetAsync<MyClass>(key);
+                Console.WriteLine(v.Message);
+            }, "exchange", key, logger);
+            
+            rabbitMqService.Publish(myClass, "exchange", key);
         }
 
         public async Task HandleAsync(BotUpdateContext botUpdateContext)
         {
-            var chatId = botUpdateContext.Update.Message?.Chat.Id ?? -1;
-
-            var commands = _commandsListService.GetCommands();
-            var replyKeyboardMarkup = new ReplyKeyboardMarkup(
-                new[]
-                {
-                    commands.Select(x => new KeyboardButton(x)).ToArray()
-                    //new KeyboardButton[] { "Three", "Four" },
-                })
-            {
-                ResizeKeyboard = true
-            };
-
+            var chatId = botUpdateContext.Update.Message!.Chat.Id;
             await botUpdateContext.BotClient.SendTextMessageAsync(chatId, _constantMessagesService.Greetings,
                 cancellationToken: botUpdateContext.CancellationToken);
-
-            await botUpdateContext.BotClient.SendTextMessageAsync(
-                chatId,
-                _constantMessagesService.AvailableCommands,
-                replyMarkup: replyKeyboardMarkup, cancellationToken: botUpdateContext.CancellationToken);
         }
     }
 }

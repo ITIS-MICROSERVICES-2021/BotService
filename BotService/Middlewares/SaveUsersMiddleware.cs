@@ -4,7 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BotService.Models;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using RabbitMQ.Services;
+using RedisIO.Services;
 using Telegram.Bot.Host.Middleware;
 
 namespace BotService.Middlewares
